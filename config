@@ -1,0 +1,50 @@
+server {
+    listen 127.0.0.1:1234;
+    root /nfs/homes/aharrass/;
+    client_max_body_size 100000000000000;
+    #index index.html;
+
+    location / {
+        allow GET;
+        allow POST;
+        allow DELETE;
+        #index index.php;
+        #upload /nfs/homes/aharrass/webserv/;
+        cgi php /usr/bin/php-cgi;
+        cgi py /usr/bin/python3;
+        autoindex on;
+        #return 301 index.php;
+    }
+
+    location  /test  {
+        root /nfs/homes/aharrass;
+        #index index.html;
+        autoindex on;
+        allow POST;
+        allow GET;
+        allow DELETE;
+        cgi php /usr/bin/php-cgi;
+        #upload /nfs/homes/aharrass/webserv;
+        #return 301 https://www.youtube.com;
+    }
+
+}
+server {
+    listen 127.0.0.2:8080;
+
+    root /nfs/homes/aharrass/;
+    index index.html;
+
+
+    location  /42 {
+        root /nfs/homes/aharrass;
+        index index.html;
+        autoindex on;
+        allow POST;
+        allow GET;
+        allow DELETE;
+        cgi php /usr/bin/php-cgi;
+        #upload /nfs/homes/aharrass/webserv;
+        #return 301 https://www.youtube.com;
+    }
+}
